@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initializeLanguageSelector();
     initializeCurrencySelector();
     initializeWeekendModal();
+    initializeGlobalClickHandler();
     
     // Проверяем выходные и обновляем состояние вкладок
     updateTabStates();
@@ -140,6 +141,21 @@ function initializeTimeButtons() {
             e.stopPropagation();
             
             console.log('Time button clicked:', button.dataset.time);
+            
+            // Принудительно закрываем все выпадающие списки
+            const currencyDropdown = document.getElementById('currency-dropdown');
+            const languageDropdown = document.getElementById('language-dropdown');
+            const currencyBtn = document.getElementById('currency-btn');
+            
+            if (currencyDropdown) {
+                currencyDropdown.classList.remove('show');
+            }
+            if (languageDropdown) {
+                languageDropdown.classList.remove('show');
+            }
+            if (currencyBtn) {
+                currencyBtn.classList.remove('active');
+            }
             
             // Убираем активный класс со всех кнопок
             timeButtons.forEach(btn => btn.classList.remove('active'));
@@ -1199,6 +1215,33 @@ function initializeWeekendModal() {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal.classList.contains('show')) {
             modal.classList.remove('show');
+        }
+    });
+}
+
+// Глобальный обработчик кликов для закрытия выпадающих списков
+function initializeGlobalClickHandler() {
+    document.addEventListener('click', (e) => {
+        const currencyDropdown = document.getElementById('currency-dropdown');
+        const languageDropdown = document.getElementById('language-dropdown');
+        const currencyBtn = document.getElementById('currency-btn');
+        const languageBtn = document.getElementById('language-btn');
+        
+        // Проверяем, не кликнули ли мы по элементам выпадающих списков
+        const isCurrencyClick = currencyBtn && currencyBtn.contains(e.target);
+        const isLanguageClick = languageBtn && languageBtn.contains(e.target);
+        const isCurrencyDropdownClick = currencyDropdown && currencyDropdown.contains(e.target);
+        const isLanguageDropdownClick = languageDropdown && languageDropdown.contains(e.target);
+        
+        // Если клик не по элементам валютного селектора, закрываем его
+        if (!isCurrencyClick && !isCurrencyDropdownClick && currencyDropdown && currencyDropdown.classList.contains('show')) {
+            currencyDropdown.classList.remove('show');
+            if (currencyBtn) currencyBtn.classList.remove('active');
+        }
+        
+        // Если клик не по элементам языкового селектора, закрываем его
+        if (!isLanguageClick && !isLanguageDropdownClick && languageDropdown && languageDropdown.classList.contains('show')) {
+            languageDropdown.classList.remove('show');
         }
     });
 }
