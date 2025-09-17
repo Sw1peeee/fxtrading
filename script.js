@@ -45,6 +45,28 @@ document.addEventListener("DOMContentLoaded", () => {
     initializeWeekendModal();
     initializeGlobalClickHandler();
     
+    // Принудительно закрываем все выпадающие списки при загрузке
+    setTimeout(() => {
+        const currencyDropdown = document.getElementById('currency-dropdown');
+        const languageDropdown = document.getElementById('language-dropdown');
+        const currencyBtn = document.getElementById('currency-btn');
+        
+        if (currencyDropdown) {
+            currencyDropdown.classList.remove('show');
+            currencyDropdown.style.pointerEvents = 'none';
+            currencyDropdown.style.visibility = 'hidden';
+            currencyDropdown.style.zIndex = '1';
+        }
+        if (languageDropdown) {
+            languageDropdown.classList.remove('show');
+        }
+        if (currencyBtn) {
+            currencyBtn.classList.remove('active');
+        }
+        
+        console.log('Forced close all dropdowns on initialization');
+    }, 100);
+    
     // Проверяем выходные и обновляем состояние вкладок
     updateTabStates();
     
@@ -140,15 +162,24 @@ function initializeTimeButtons() {
             e.preventDefault();
             e.stopPropagation();
             
-            console.log('Time button clicked:', button.dataset.time);
+            console.log('=== TIME BUTTON CLICKED ===');
+            console.log('Button:', button.dataset.time);
+            console.log('Event target:', e.target);
+            console.log('Current pair before:', currentPair);
             
             // Принудительно закрываем все выпадающие списки
             const currencyDropdown = document.getElementById('currency-dropdown');
             const languageDropdown = document.getElementById('language-dropdown');
             const currencyBtn = document.getElementById('currency-btn');
             
+            console.log('Currency dropdown show class:', currencyDropdown?.classList.contains('show'));
+            console.log('Language dropdown show class:', languageDropdown?.classList.contains('show'));
+            
             if (currencyDropdown) {
                 currencyDropdown.classList.remove('show');
+                currencyDropdown.style.pointerEvents = 'none';
+                currencyDropdown.style.visibility = 'hidden';
+                currencyDropdown.style.zIndex = '-1';
             }
             if (languageDropdown) {
                 languageDropdown.classList.remove('show');
@@ -165,6 +196,8 @@ function initializeTimeButtons() {
             currentTimeframe = button.dataset.time;
             
             console.log('Current timeframe set to:', currentTimeframe);
+            console.log('Current pair after:', currentPair);
+            console.log('=== END TIME BUTTON CLICK ===');
         });
     });
 }
@@ -1114,6 +1147,11 @@ function initializeCurrencySelector() {
             e.stopPropagation();
             const selectedCurrency = option.textContent;
             
+            console.log('=== CURRENCY OPTION CLICKED ===');
+            console.log('Selected currency:', selectedCurrency);
+            console.log('Event target:', e.target);
+            console.log('Current pair before:', currentPair);
+            
             // Обновляем кнопку
             updateCurrencyButton(selectedCurrency);
             
@@ -1123,6 +1161,9 @@ function initializeCurrencySelector() {
             
             // Обновляем текущую валютную пару
             currentPair = selectedCurrency;
+            
+            console.log('Current pair after:', currentPair);
+            console.log('=== END CURRENCY OPTION CLICK ===');
             
             // Проверяем кулдаун для новой валютной пары
             const generateButton = document.getElementById("generate-btn");
