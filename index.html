@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Signals</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <h1 class="main-title">Trading Signals</h1>
+        <p class="subtitle">Professional trading signals for binary options</p>
+        
+                <!-- Tab Navigation -->
+                <div class="tab-navigation">
+                    <button class="tab-btn active" data-tab="otc">
+                        <i class="fas fa-star"></i>
+                        <span>OTC</span>
+                    </button>
+                    <button class="tab-btn" data-tab="forex">
+                        <i class="fas fa-plus"></i>
+                        <span>Forex</span>
+                    </button>
+                </div>
+    </header>
+
+    <!-- Main Panel -->
+    <div class="main-panel">
+            <div class="panel-header">
+                <h2 class="panel-title">
+                    <img src="trading.png" alt="Trading Icon" class="trading-icon">
+                    Trading Signals
+                </h2>
+            </div>
+
+            <!-- Language Selector -->
+            <div class="language-selector">
+                <button class="language-btn" id="language-btn">
+                    <i class="fas fa-globe"></i>
+                    <img src="https://flagcdn.com/16x12/us.png" alt="US Flag" class="flag-icon">
+                    <span>English</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="language-dropdown" id="language-dropdown">
+                    <div class="language-option active" data-lang="en">
+                        <img src="https://flagcdn.com/16x12/us.png" alt="US Flag" class="flag-icon">
+                        <span>English</span>
+                    </div>
+                    <div class="language-option" data-lang="ru">
+                        <img src="https://flagcdn.com/16x12/ru.png" alt="Russian Flag" class="flag-icon">
+                        <span>Русский</span>
+                    </div>
+                    <div class="language-option" data-lang="es">
+                        <img src="https://flagcdn.com/16x12/es.png" alt="Spanish Flag" class="flag-icon">
+                        <span>Español</span>
+                    </div>
+                    <div class="language-option" data-lang="de">
+                        <img src="https://flagcdn.com/16x12/de.png" alt="German Flag" class="flag-icon">
+                        <span>Deutsch</span>
+                    </div>
+                    <div class="language-option" data-lang="pt">
+                        <img src="https://flagcdn.com/16x12/pt.png" alt="Portuguese Flag" class="flag-icon">
+                        <span>Português</span>
+                    </div>
+                    <div class="language-option" data-lang="hi">
+                        <img src="https://flagcdn.com/16x12/in.png" alt="Indian Flag" class="flag-icon">
+                        <span>हिन्दी</span>
+                    </div>
+                    <div class="language-option" data-lang="tr">
+                        <img src="https://flagcdn.com/16x12/tr.png" alt="Turkish Flag" class="flag-icon">
+                        <span>Türkçe</span>
+                    </div>
+                    <div class="language-option" data-lang="ar">
+                        <img src="https://flagcdn.com/16x12/sa.png" alt="Saudi Flag" class="flag-icon">
+                        <span>العربية</span>
+                    </div>
+                    <div class="language-option" data-lang="uz">
+                        <img src="https://flagcdn.com/16x12/uz.png" alt="Uzbekistan Flag" class="flag-icon">
+                        <span>O'zbekcha</span>
+                    </div>
+                    <div class="language-option" data-lang="tg">
+                        <img src="https://flagcdn.com/16x12/tj.png" alt="Tajikistan Flag" class="flag-icon">
+                        <span>Тоҷикӣ</span>
+                    </div>
+                    <div class="language-option" data-lang="az">
+                        <img src="https://flagcdn.com/16x12/az.png" alt="Azerbaijan Flag" class="flag-icon">
+                        <span>Azərbaycan</span>
+                    </div>
+                    <div class="language-option" data-lang="hy">
+                        <img src="https://flagcdn.com/16x12/am.png" alt="Armenian Flag" class="flag-icon">
+                        <span>Հայերեն</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Currency Pair Selector -->
+            <div class="currency-selector">
+                <label id="currency-label">Currency Pair</label>
+                <button class="currency-btn" id="currency-btn">
+                    <i class="fas fa-coins"></i>
+                    <span>OTC EUR/USD</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="currency-dropdown" id="currency-dropdown">
+                    <div class="currency-option active" data-currency="OTC EUR/USD">OTC EUR/USD</div>
+                    <div class="currency-option" data-currency="OTC GBP/USD">OTC GBP/USD</div>
+                    <div class="currency-option" data-currency="OTC USD/JPY">OTC USD/JPY</div>
+                    <div class="currency-option" data-currency="OTC USD/CHF">OTC USD/CHF</div>
+                    <div class="currency-option" data-currency="OTC AUD/USD">OTC AUD/USD</div>
+                    <div class="currency-option" data-currency="OTC USD/CAD">OTC USD/CAD</div>
+                    <div class="currency-option" data-currency="OTC NZD/USD">OTC NZD/USD</div>
+                    <div class="currency-option" data-currency="OTC EUR/GBP">OTC EUR/GBP</div>
+                    <div class="currency-option" data-currency="OTC EUR/JPY">OTC EUR/JPY</div>
+                    <div class="currency-option" data-currency="OTC GBP/JPY">OTC GBP/JPY</div>
+                    <div class="currency-option" data-currency="OTC EUR/CHF">OTC EUR/CHF</div>
+                    <div class="currency-option" data-currency="OTC AUD/JPY">OTC AUD/JPY</div>
+                    <div class="currency-option" data-currency="OTC CAD/JPY">OTC CAD/JPY</div>
+                    <div class="currency-option" data-currency="OTC NZD/JPY">OTC NZD/JPY</div>
+                    <div class="currency-option" data-currency="OTC GBP/CHF">OTC GBP/CHF</div>
+                    <div class="currency-option" data-currency="OTC AUD/NZD">OTC AUD/NZD</div>
+                    <div class="currency-option" data-currency="OTC USD/RUB">OTC USD/RUB</div>
+                    <div class="currency-option" data-currency="OTC CHF/JPY">OTC CHF/JPY</div>
+                    <div class="currency-option" data-currency="OTC AUD/CAD">OTC AUD/CAD</div>
+                    <div class="currency-option" data-currency="EUR/USD">EUR/USD</div>
+                    <div class="currency-option" data-currency="GBP/USD">GBP/USD</div>
+                    <div class="currency-option" data-currency="USD/JPY">USD/JPY</div>
+                    <div class="currency-option" data-currency="USD/CHF">USD/CHF</div>
+                    <div class="currency-option" data-currency="AUD/USD">AUD/USD</div>
+                    <div class="currency-option" data-currency="USD/CAD">USD/CAD</div>
+                    <div class="currency-option" data-currency="NZD/USD">NZD/USD</div>
+                    <div class="currency-option" data-currency="EUR/GBP">EUR/GBP</div>
+                    <div class="currency-option" data-currency="EUR/JPY">EUR/JPY</div>
+                    <div class="currency-option" data-currency="GBP/JPY">GBP/JPY</div>
+                    <div class="currency-option" data-currency="EUR/CHF">EUR/CHF</div>
+                    <div class="currency-option" data-currency="AUD/JPY">AUD/JPY</div>
+                    <div class="currency-option" data-currency="CAD/JPY">CAD/JPY</div>
+                    <div class="currency-option" data-currency="NZD/JPY">NZD/JPY</div>
+                    <div class="currency-option" data-currency="GBP/CHF">GBP/CHF</div>
+                    <div class="currency-option" data-currency="AUD/NZD">AUD/NZD</div>
+                    <div class="currency-option" data-currency="USD/RUB">USD/RUB</div>
+                    <div class="currency-option" data-currency="CHF/JPY">CHF/JPY</div>
+                    <div class="currency-option" data-currency="AUD/CAD">AUD/CAD</div>
+                    <div class="currency-option" data-currency="BTC/USD">BTC/USD</div>
+                    <div class="currency-option" data-currency="XAU/USD">XAU/USD</div>
+                    <div class="currency-option" data-currency="ETH/USD">ETH/USD</div>
+            </div>
+        </div>
+
+            <!-- Expiration Time Options -->
+            <div class="expiration-time">
+                <label id="timeframe-label">Expiration Time</label>
+                <div class="time-buttons">
+                    <button class="time-btn active" data-time="5s">
+                        <span class="time-short">S5</span>
+                        <span class="time-full">5 seconds</span>
+                    </button>
+                    <button class="time-btn" data-time="15s">
+                        <span class="time-short">S15</span>
+                        <span class="time-full">15 seconds</span>
+                    </button>
+                    <button class="time-btn" data-time="30s">
+                        <span class="time-short">S30</span>
+                        <span class="time-full">30 seconds</span>
+                    </button>
+                    <button class="time-btn" data-time="1m">
+                        <span class="time-short">M1</span>
+                        <span class="time-full">1 minute</span>
+                    </button>
+                    <button class="time-btn" data-time="3m">
+                        <span class="time-short">M3</span>
+                        <span class="time-full">3 minutes</span>
+                    </button>
+                    <button class="time-btn" data-time="5m">
+                        <span class="time-short">M5</span>
+                        <span class="time-full">5 minutes</span>
+                    </button>
+                    <button class="time-btn" data-time="30m">
+                        <span class="time-short">M30</span>
+                        <span class="time-full">30 minutes</span>
+                    </button>
+                    <button class="time-btn" data-time="1h">
+                        <span class="time-short">H1</span>
+                        <span class="time-full">1 hour</span>
+                    </button>
+                    <button class="time-btn" data-time="4h">
+                        <span class="time-short">H4</span>
+                        <span class="time-full">4 hours</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button id="generate-btn" class="generate-btn">
+                    <i class="fas fa-bolt"></i>
+                    <span>Get Signal</span>
+                </button>
+            </div>
+
+            <!-- Signal Result Section -->
+                <div id="signal-result" class="signal-result">
+                    <div class="signal-placeholder">
+                    Click 'Get Signal'
+            </div>
+        </div>
+    </div>
+
+    <!-- Weekend Modal -->
+    <div id="weekend-modal" class="weekend-modal">
+        <div class="weekend-modal-content">
+            <div class="weekend-modal-header">
+                <div class="weekend-modal-icon">
+                    <i class="fas fa-calendar-times"></i>
+                </div>
+                <h3 id="weekend-modal-title">Market Closed</h3>
+            </div>
+            <div class="weekend-modal-body">
+                <p id="weekend-modal-message">Forex market is closed on weekends (Saturday and Sunday)</p>
+                <div class="weekend-modal-info">
+                    <div class="weekend-info-item">
+                        <i class="fas fa-clock"></i>
+                        <span id="weekend-modal-schedule">Trading hours: Monday - Friday</span>
+                    </div>
+                    <div class="weekend-info-item">
+                        <i class="fas fa-coins"></i>
+                        <span id="weekend-modal-alternative">Use OTC trading instead</span>
+                    </div>
+                </div>
+            </div>
+            <div class="weekend-modal-footer">
+                <button id="weekend-modal-close" class="weekend-modal-btn">
+                    <i class="fas fa-check"></i>
+                    <span id="weekend-modal-btn-text">Got it</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
