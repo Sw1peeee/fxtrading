@@ -251,18 +251,9 @@ body {
     max-height: 300px;
     overflow-y: auto;
     
-    /* Скрываем полосы прокрутки */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-    
     /* Плавная прокрутка */
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-}
-
-/* Скрываем полосы прокрутки для WebKit браузеров */
-.language-dropdown::-webkit-scrollbar {
-    display: none;
 }
 
 .language-dropdown.show {
@@ -403,18 +394,31 @@ body {
     max-height: 300px;
     overflow-y: auto;
     
-    /* Скрываем полосы прокрутки */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
+    /* Агрессивное скрытие полос прокрутки */
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE and Edge */
     
     /* Плавная прокрутка */
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
 }
 
-/* Скрываем полосы прокрутки для WebKit браузеров */
+/* Агрессивное скрытие полос прокрутки для WebKit браузеров */
 .currency-dropdown::-webkit-scrollbar {
-    display: none;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+}
+
+.currency-dropdown::-webkit-scrollbar-track {
+    display: none !important;
+    background: transparent !important;
+}
+
+.currency-dropdown::-webkit-scrollbar-thumb {
+    display: none !important;
+    background: transparent !important;
 }
 
 .currency-dropdown.show {
@@ -1001,6 +1005,29 @@ body {
     
     .subtitle {
         font-size: 0.75rem;
+    }
+    
+    /* Дополнительное скрытие полос прокрутки для Telegram WebApp */
+    .currency-dropdown {
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+    }
+    
+    .currency-dropdown::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        background: transparent !important;
+    }
+    
+    .currency-dropdown::-webkit-scrollbar-track {
+        display: none !important;
+        background: transparent !important;
+    }
+    
+    .currency-dropdown::-webkit-scrollbar-thumb {
+        display: none !important;
+        background: transparent !important;
     }
 }
 
