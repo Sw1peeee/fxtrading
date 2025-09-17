@@ -250,6 +250,19 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     max-height: 300px;
     overflow-y: auto;
+    
+    /* Скрываем полосы прокрутки */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    
+    /* Плавная прокрутка */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Скрываем полосы прокрутки для WebKit браузеров */
+.language-dropdown::-webkit-scrollbar {
+    display: none;
 }
 
 .language-dropdown.show {
@@ -389,6 +402,19 @@ body {
     backdrop-filter: blur(15px);
     max-height: 300px;
     overflow-y: auto;
+    
+    /* Скрываем полосы прокрутки */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    
+    /* Плавная прокрутка */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Скрываем полосы прокрутки для WebKit браузеров */
+.currency-dropdown::-webkit-scrollbar {
+    display: none;
 }
 
 .currency-dropdown.show {
