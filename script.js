@@ -135,13 +135,20 @@ function initializeTimeButtons() {
     const timeButtons = document.querySelectorAll('.time-btn');
     
     timeButtons.forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('Time button clicked:', button.dataset.time);
+            
             // Убираем активный класс со всех кнопок
             timeButtons.forEach(btn => btn.classList.remove('active'));
             // Добавляем активный класс к выбранной кнопке
             button.classList.add('active');
             // Обновляем текущий таймфрейм
             currentTimeframe = button.dataset.time;
+            
+            console.log('Current timeframe set to:', currentTimeframe);
         });
     });
 }
@@ -1077,6 +1084,7 @@ function initializeCurrencySelector() {
     
     // Обработчик клика по кнопке валют
     currencyBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         e.stopPropagation();
         const isOpen = currencyDropdown.classList.contains('show');
         currencyDropdown.classList.toggle('show');
@@ -1086,6 +1094,7 @@ function initializeCurrencySelector() {
     // Обработчики выбора валюты
     currencyOptions.forEach(option => {
         option.addEventListener('click', (e) => {
+            e.preventDefault();
             e.stopPropagation();
             const selectedCurrency = option.textContent;
             
