@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initializeLanguageSelector();
     initializeCurrencySelector();
     initializeWeekendModal();
-    initializeGlobalClickHandler();
+    // initializeGlobalClickHandler(); // Временно отключаем для тестирования
     
     // Проверяем выходные и обновляем состояние вкладок
     updateTabStates();
@@ -1091,7 +1091,19 @@ function initializeCurrencySelector() {
     // Обработчик клика по кнопке валют
     currencyBtn.addEventListener('click', (e) => {
         e.stopPropagation();
+        console.log('=== CURRENCY BUTTON CLICKED ===');
+        console.log('Currency dropdown show class before:', currencyDropdown.classList.contains('show'));
+        
+        // Закрываем языковой селектор, если он открыт
+        const languageDropdown = document.getElementById('language-dropdown');
+        if (languageDropdown && languageDropdown.classList.contains('show')) {
+            languageDropdown.classList.remove('show');
+            console.log('Closed language dropdown');
+        }
+        
         currencyDropdown.classList.toggle('show');
+        console.log('Currency dropdown show class after:', currencyDropdown.classList.contains('show'));
+        console.log('=== END CURRENCY BUTTON CLICK ===');
     });
     
     // Обработчики выбора валюты
