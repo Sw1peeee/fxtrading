@@ -45,28 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initializeWeekendModal();
     initializeGlobalClickHandler();
     
-    // Принудительно закрываем все выпадающие списки при загрузке
-    setTimeout(() => {
-        const currencyDropdown = document.getElementById('currency-dropdown');
-        const languageDropdown = document.getElementById('language-dropdown');
-        const currencyBtn = document.getElementById('currency-btn');
-        
-        if (currencyDropdown) {
-            currencyDropdown.classList.remove('show');
-            currencyDropdown.style.pointerEvents = 'none';
-            currencyDropdown.style.visibility = 'hidden';
-            currencyDropdown.style.zIndex = '1';
-        }
-        if (languageDropdown) {
-            languageDropdown.classList.remove('show');
-        }
-        if (currencyBtn) {
-            currencyBtn.classList.remove('active');
-        }
-        
-        console.log('Forced close all dropdowns on initialization');
-    }, 100);
-    
     // Проверяем выходные и обновляем состояние вкладок
     updateTabStates();
     
@@ -166,27 +144,6 @@ function initializeTimeButtons() {
             console.log('Button:', button.dataset.time);
             console.log('Event target:', e.target);
             console.log('Current pair before:', currentPair);
-            
-            // Принудительно закрываем все выпадающие списки
-            const currencyDropdown = document.getElementById('currency-dropdown');
-            const languageDropdown = document.getElementById('language-dropdown');
-            const currencyBtn = document.getElementById('currency-btn');
-            
-            console.log('Currency dropdown show class:', currencyDropdown?.classList.contains('show'));
-            console.log('Language dropdown show class:', languageDropdown?.classList.contains('show'));
-            
-            if (currencyDropdown) {
-                currencyDropdown.classList.remove('show');
-                currencyDropdown.style.pointerEvents = 'none';
-                currencyDropdown.style.visibility = 'hidden';
-                currencyDropdown.style.zIndex = '-1';
-            }
-            if (languageDropdown) {
-                languageDropdown.classList.remove('show');
-            }
-            if (currencyBtn) {
-                currencyBtn.classList.remove('active');
-            }
             
             // Убираем активный класс со всех кнопок
             timeButtons.forEach(btn => btn.classList.remove('active'));
@@ -1133,17 +1090,13 @@ function initializeCurrencySelector() {
     
     // Обработчик клика по кнопке валют
     currencyBtn.addEventListener('click', (e) => {
-        e.preventDefault();
         e.stopPropagation();
-        const isOpen = currencyDropdown.classList.contains('show');
         currencyDropdown.classList.toggle('show');
-        currencyBtn.classList.toggle('active', !isOpen);
     });
     
     // Обработчики выбора валюты
     currencyOptions.forEach(option => {
         option.addEventListener('click', (e) => {
-            e.preventDefault();
             e.stopPropagation();
             const selectedCurrency = option.textContent;
             
@@ -1180,18 +1133,17 @@ function initializeCurrencySelector() {
                 generateButton.innerHTML = `<i class="fas fa-bolt"></i><span>${buttonText}</span>`;
             }
             
-            // Закрываем меню
+            // Закрываем меню сразу
             currencyDropdown.classList.remove('show');
-            currencyBtn.classList.remove('active');
         });
     });
     
-    // Закрытие выпадающего меню при клике вне его
+    // Закрытие выпадающего меню при клике вне его (с задержкой)
     document.addEventListener('click', (e) => {
         setTimeout(() => {
+            // Проверяем, что клик не по кнопке валют и не по выпадающему меню
             if (!currencyBtn.contains(e.target) && !currencyDropdown.contains(e.target)) {
                 currencyDropdown.classList.remove('show');
-                currencyBtn.classList.remove('active');
             }
         }, 10);
     });
@@ -1277,7 +1229,6 @@ function initializeGlobalClickHandler() {
         // Если клик не по элементам валютного селектора, закрываем его
         if (!isCurrencyClick && !isCurrencyDropdownClick && currencyDropdown && currencyDropdown.classList.contains('show')) {
             currencyDropdown.classList.remove('show');
-            if (currencyBtn) currencyBtn.classList.remove('active');
         }
         
         // Если клик не по элементам языкового селектора, закрываем его
